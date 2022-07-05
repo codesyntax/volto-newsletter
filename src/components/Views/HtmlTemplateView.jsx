@@ -2,8 +2,7 @@
  * NewsItemView view component.
  * @module Components/Views/HtmlTemplateView
  */
-
-import React, { useEffect, useState } from 'react';
+import moment from 'moment';
 /**
  * ContractView view component class.
  * @function HtmlTemplateView
@@ -31,7 +30,7 @@ const cssStyle = {
         margin: '0',
         fontWeight: 'normal',
     },
-    backgroundColor: { backgroundColor: '#CC5D58' },
+    backgroundColor: { backgroundColor: '#BD097F' },
     newsletterDate: {
         height: '30px',
         color: 'white',
@@ -109,7 +108,8 @@ const cssStyle = {
     textdecorationnone: { textDecoration: 'none' },
     textcolorwhite: { color: 'white' },
 };
-const HtmlTemplateView = ({ newsitems, title }) => {
+const HtmlTemplateView = ({ newsitems, title, content }) => {
+    moment.locale(content.language.token);
     return (
         <>
             <html xmlns="http://www.w3.org/1999/xhtml">
@@ -189,21 +189,25 @@ const HtmlTemplateView = ({ newsitems, title }) => {
                                                                     {title}
                                                                 </td>
                                                             </tr>
-                                                            <tr>
-                                                                <td
-                                                                    style={
-                                                                        cssStyle.headerImage
-                                                                    }
-                                                                >
-                                                                    <img
-                                                                        src="https://zumaia.eus/buletinimages/goiburua.png"
-                                                                        width="650"
-                                                                        height="100"
-                                                                        border="0"
-                                                                        alt=""
-                                                                    />
-                                                                </td>
-                                                            </tr>
+                                                            {content.newsletter_header_image_url && (
+                                                                <tr>
+                                                                    <td
+                                                                        style={
+                                                                            cssStyle.headerImage
+                                                                        }
+                                                                    >
+                                                                        <img
+                                                                            src={
+                                                                                content.newsletter_header_image_url
+                                                                            }
+                                                                            width="650"
+                                                                            height="100"
+                                                                            border="0"
+                                                                            alt=""
+                                                                        />
+                                                                    </td>
+                                                                </tr>
+                                                            )}
                                                         </table>
 
                                                         <table
@@ -378,7 +382,7 @@ const HtmlTemplateView = ({ newsitems, title }) => {
                                                                                                                                                                 <a
                                                                                                                                                                     style={{
                                                                                                                                                                         color:
-                                                                                                                                                                            '#A20431',
+                                                                                                                                                                            '#BD097F',
                                                                                                                                                                         textDecoration:
                                                                                                                                                                             'none',
                                                                                                                                                                     }}
@@ -411,9 +415,11 @@ const HtmlTemplateView = ({ newsitems, title }) => {
                                                                                                                                                                     '#666',
                                                                                                                                                             }}
                                                                                                                                                         >
-                                                                                                                                                            {
-                                                                                                                                                                newsitem.effective
-                                                                                                                                                            }
+                                                                                                                                                            {moment(
+                                                                                                                                                                newsitem.effective,
+                                                                                                                                                            ).format(
+                                                                                                                                                                'LL',
+                                                                                                                                                            )}
                                                                                                                                                         </td>
                                                                                                                                                     </tr>
                                                                                                                                                     <tr>
@@ -505,7 +511,9 @@ const HtmlTemplateView = ({ newsitems, title }) => {
                                                             border="0"
                                                             cellSpacing="0"
                                                             cellPadding="0"
-                                                            bgcolor="#579D7E"
+                                                            style={
+                                                                cssStyle.backgroundColor
+                                                            }
                                                         >
                                                             <tr>
                                                                 <td
@@ -520,60 +528,46 @@ const HtmlTemplateView = ({ newsitems, title }) => {
                                                                         cellSpacing="0"
                                                                         cellPadding="0"
                                                                     >
-                                                                        <tr>
-                                                                            <td
-                                                                                style={
-                                                                                    cssStyle.footerTitle
-                                                                                }
-                                                                            >
-                                                                                ZUMAIAKO
-                                                                                UDALA
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td
-                                                                                style={
-                                                                                    cssStyle.footerInformation
-                                                                                }
-                                                                            >
-                                                                                Foruen
-                                                                                plaza,
-                                                                                1
-                                                                                -
-                                                                                20750
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td
-                                                                                style={
-                                                                                    cssStyle.footerInformation
-                                                                                }
-                                                                            >
-                                                                                Telefonoa:
-                                                                                943
-                                                                                865025
-                                                                                -
-                                                                                Faxa:
-                                                                                943
-                                                                                862456
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td
-                                                                                style={
-                                                                                    cssStyle.footerInformation
-                                                                                }
-                                                                            >
-                                                                                <a
-                                                                                    href="https://zumaia.eus/eu/contact-info"
+                                                                        {content.newsletter_footer_title && (
+                                                                            <tr>
+                                                                                <td
                                                                                     style={
-                                                                                        cssStyle.textcolorwhite
+                                                                                        cssStyle.footerTitle
                                                                                     }
                                                                                 >
-                                                                                    e-posta
-                                                                                </a>
-                                                                            </td>
-                                                                        </tr>
+                                                                                    {
+                                                                                        content.newsletter_footer_title
+                                                                                    }
+                                                                                </td>
+                                                                            </tr>
+                                                                        )}
+
+                                                                        {content.newsletter_footer_address && (
+                                                                            <tr>
+                                                                                <td
+                                                                                    style={
+                                                                                        cssStyle.footerInformation
+                                                                                    }
+                                                                                >
+                                                                                    {
+                                                                                        content.newsletter_footer_address
+                                                                                    }
+                                                                                </td>
+                                                                            </tr>
+                                                                        )}
+                                                                        {content.newsletter_footer_telephone && (
+                                                                            <tr>
+                                                                                <td
+                                                                                    style={
+                                                                                        cssStyle.footerInformation
+                                                                                    }
+                                                                                >
+                                                                                    {
+                                                                                        content.newsletter_footer_telephone
+                                                                                    }
+                                                                                </td>
+                                                                            </tr>
+                                                                        )}
                                                                     </table>
                                                                 </td>
                                                             </tr>

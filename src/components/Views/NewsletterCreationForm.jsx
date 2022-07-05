@@ -55,6 +55,7 @@ const NewsletterCreationForm = ({ content }) => {
             newsletterTitle + ' - ' + moment(today.toISOString()).format('LL');
         const text = renderToString(
             <HtmlTemplateView
+                content={content}
                 newsitems={result}
                 title={formatedtitle}
             ></HtmlTemplateView>,
