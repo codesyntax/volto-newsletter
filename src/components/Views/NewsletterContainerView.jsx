@@ -17,44 +17,50 @@ import NewsletterCreationForm from './NewsletterCreationForm';
  * @returns {string} Markup of the component.
  */
 const NewsletterContainerView = ({ content }) => {
-  let lang = useSelector((state) => state.intl.locale);
-  moment.locale(lang);
+    let lang = useSelector((state) => state.intl.locale);
+    moment.locale(lang);
 
-  return (
-    <Container className="view-wrapper grid stackable">
-      <Grid.Row>
-        <Grid.Column width={1}></Grid.Column>
-        <Grid.Column width={10}>
-          {content.title && (
-            <h1 className="documentFirstHeading">{content.title}</h1>
-          )}
-          {content.description && (
-            <p className="documentDescription">{content.description}</p>
-          )}
-          <NewsletterCreationForm />
-          {content.items?.length > 0 && (
-            <>
-              <div className="newletter-elements">
-                <h2>Newsletter elements</h2>
-                <ul>
-                  {content.items.map((newsletter, index) => (
-                    <>
-                      <li>
-                        <UniversalLink href={newsletter['@id']}>
-                          {newsletter.title}
-                        </UniversalLink>
-                      </li>
-                    </>
-                  ))}
-                </ul>
-              </div>
-            </>
-          )}
-        </Grid.Column>
-        <Grid.Column width={1}></Grid.Column>
-      </Grid.Row>
-    </Container>
-  );
+    return (
+        <Container className="view-wrapper grid stackable">
+            <Grid.Row>
+                <Grid.Column width={1}></Grid.Column>
+                <Grid.Column width={10}>
+                    {content.title && (
+                        <h1 className="documentFirstHeading">
+                            {content.title}
+                        </h1>
+                    )}
+                    {content.description && (
+                        <p className="documentDescription">
+                            {content.description}
+                        </p>
+                    )}
+                    <NewsletterCreationForm content={content} />
+                    {content.items?.length > 0 && (
+                        <>
+                            <div className="newletter-elements">
+                                <h2>Newsletter elements</h2>
+                                <ul>
+                                    {content.items.map((newsletter, index) => (
+                                        <>
+                                            <li>
+                                                <UniversalLink
+                                                    href={newsletter['@id']}
+                                                >
+                                                    {newsletter.title}
+                                                </UniversalLink>
+                                            </li>
+                                        </>
+                                    ))}
+                                </ul>
+                            </div>
+                        </>
+                    )}
+                </Grid.Column>
+                <Grid.Column width={1}></Grid.Column>
+            </Grid.Row>
+        </Container>
+    );
 };
 
 /**
@@ -63,10 +69,10 @@ const NewsletterContainerView = ({ content }) => {
  * @static
  */
 NewsletterContainerView.propTypes = {
-  content: PropTypes.shape({
-    title: PropTypes.string,
-    description: PropTypes.string,
-  }).isRequired,
+    content: PropTypes.shape({
+        title: PropTypes.string,
+        description: PropTypes.string,
+    }).isRequired,
 };
 
 export default NewsletterContainerView;

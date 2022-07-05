@@ -16,14 +16,14 @@ import HtmlTemplateView from './HtmlTemplateView';
 import { Toast } from '@plone/volto/components';
 import { toast } from 'react-toastify';
 import { renderToString } from 'react-dom/server';
-
+import { Input } from 'semantic-ui-react';
 /**
  * ContractView view component class.
  * @function NewsletterCreationForm
  * @params {object} content Content object.
  * @returns {string} Markup of the component.
  */
-const NewsletterCreationForm = () => {
+const NewsletterCreationForm = ({ content }) => {
     const dispatch = useDispatch();
     let lang = useSelector((state) => state.intl.locale);
     moment.locale(lang);
@@ -32,7 +32,11 @@ const NewsletterCreationForm = () => {
     }, [dispatch]);
     const newsitems = useSelector((state) => state.newsitems.newsitems);
     const [newsSelection, setNewsSelection] = useState([]);
+    const [newsletterTitle, setnewsletterTitle] = useState('Udal buletina');
 
+    function handleChangeInputTitle(event) {
+        setnewsletterTitle(event.target.value);
+    }
     const selectNews = (newsitem, checked) => {
         if (checked) {
             setNewsSelection(newsSelection.concat(newsitem['@id']));
@@ -43,16 +47,35 @@ const NewsletterCreationForm = () => {
         }
     };
     const createNewsletterHandler = () => {
-        const text = renderToString(<HtmlTemplateView></HtmlTemplateView>);
-        dispatch(createNewsletter(location.pathname, text)).then((response) => {
-            toast.success(
-                <Toast success autoClose={5000} title={response.message} />,
-            );
+        var result = newsitems.filter(function (item) {
+            return newsSelection.indexOf(item['@id']) !== -1;
         });
+        var today = new Date('05 October 2011 14:48 UTC');
+        const formatedtitle =
+            newsletterTitle + ' - ' + moment(today.toISOString()).format('LL');
+        const text = renderToString(
+            <HtmlTemplateView
+                newsitems={result}
+                title={formatedtitle}
+            ></HtmlTemplateView>,
+        );
+        dispatch(createNewsletter(location.pathname, formatedtitle, text)).then(
+            (response) => {
+                toast.success(
+                    <Toast success autoClose={5000} title={response.message} />,
+                );
+            },
+        );
         setNewsSelection([]);
     };
     return (
         <>
+            <h2>Udal buletinaren titulua</h2>
+            <Input
+                placeholder="Udal buletina"
+                value={newsletterTitle}
+                onChange={handleChangeInputTitle}
+            />
             {newsitems?.length > 0 && (
                 <>
                     <div className="newsitems">
