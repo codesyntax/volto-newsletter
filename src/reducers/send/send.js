@@ -29,7 +29,7 @@ export const sendNewsletterReducer = (state = getInitialState, action = {}) => {
         error: true,
         loaded: false,
         loading: false,
-        message: action.message,
+        message: action.result.message,
       };
     case `${SEND_NEWSLETTER}_SUCCESS`:
       return {
@@ -37,7 +37,7 @@ export const sendNewsletterReducer = (state = getInitialState, action = {}) => {
         error: null,
         loaded: true,
         loading: false,
-        message: action.message,
+        message: action.result.message,
       };
     default:
       return state;

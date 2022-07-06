@@ -3,7 +3,7 @@
  * @module Components/Views/NewsletterView
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Container } from 'semantic-ui-react';
 import { Tab } from 'semantic-ui-react';
@@ -40,21 +40,49 @@ const NewsletterView = ({ content }) => {
     const enabled =
         inputFrom.length > 0 && inputTo.length > 0 && inputSubject.length > 0;
 
-    const sendButtonHandler = () => {
-        dispatch(
-            sendNewsletter(location.pathname, inputFrom, inputTo, inputSubject),
-        ).then(() => {
+    function validateEmail(text) {
+        const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+        return reg.test(text);
+    }
+    useEffect(() => {
+        !newsletter_send.loading &&
+            newsletter_send.loaded &&
             toast.success(
                 <Toast
                     success
-                    autoClose={5000}
+                    autoClose={3000}
                     title={newsletter_send.message}
                 />,
             );
-        });
-        setinputFrom('');
-        setinputTo('');
-        setinputSubject('');
+
+        newsletter_send.error &&
+            toast.error(
+                <Toast
+                    error
+                    autoClose={3000}
+                    title={newsletter_send.message}
+                />,
+            );
+    }, [newsletter_send]);
+    const sendButtonHandler = () => {
+        const validated = validateEmail(inputFrom) && validateEmail(inputTo);
+        if (validated) {
+            dispatch(
+                sendNewsletter(
+                    location.pathname,
+                    inputFrom,
+                    inputTo,
+                    inputSubject,
+                ),
+            );
+            setinputFrom('');
+            setinputTo('');
+            setinputSubject('');
+        } else {
+            toast.error(
+                <Toast error autoClose={3000} title={'No Validated emails'} />,
+            );
+        }
     };
     const panes = [
         {
