@@ -16,8 +16,9 @@ import NewsletterCreationForm from './NewsletterCreationForm';
  * @params {object} content Content object.
  * @returns {string} Markup of the component.
  */
-const NewsletterContainerView = ({ content }) => {
+const NewsletterContainerView = (props) => {
     let lang = useSelector((state) => state.intl.locale);
+    const { content } = props;
     moment.locale(lang);
 
     return (
@@ -35,7 +36,7 @@ const NewsletterContainerView = ({ content }) => {
                             {content.description}
                         </p>
                     )}
-                    <NewsletterCreationForm content={content} />
+                    <NewsletterCreationForm props={props} />
                     {content.items?.length > 0 && (
                         <>
                             <div className="newletter-elements">

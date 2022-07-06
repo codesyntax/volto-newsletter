@@ -4,6 +4,8 @@
  */
 
 import { getNewsitemsReducer } from './newsitems/newsitems';
+import { sendNewsletterReducer } from './send/send';
+import { creationNewsletterReducer } from './creation/creation';
 /**
  * Root reducer.
  * @function
@@ -15,6 +17,8 @@ const reducers = {
   // ...defaultReducers,
   // Add your reducers here
   newsitems: getNewsitemsReducer,
+  newsletter_send: sendNewsletterReducer,
+  newsletter_creation: creationNewsletterReducer,
 };
 
 export default reducers;

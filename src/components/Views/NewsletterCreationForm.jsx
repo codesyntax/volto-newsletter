@@ -17,14 +17,20 @@ import { Toast } from '@plone/volto/components';
 import { toast } from 'react-toastify';
 import { renderToString } from 'react-dom/server';
 import { Input } from 'semantic-ui-react';
+import { createContent } from '@plone/volto/actions';
+
 /**
  * ContractView view component class.
  * @function NewsletterCreationForm
  * @params {object} content Content object.
  * @returns {string} Markup of the component.
  */
-const NewsletterCreationForm = ({ content }) => {
+const NewsletterCreationForm = ({ props }) => {
     const dispatch = useDispatch();
+    const { content } = props;
+    const newsletter_creation = useSelector(
+        (store) => store.newsletter_creation,
+    );
     let lang = useSelector((state) => state.intl.locale);
     moment.locale(lang);
     useEffect(() => {
@@ -50,7 +56,7 @@ const NewsletterCreationForm = ({ content }) => {
         var result = newsitems.filter(function (item) {
             return newsSelection.indexOf(item['@id']) !== -1;
         });
-        var today = new Date('05 October 2011 14:48 UTC');
+        var today = new Date();
         const formatedtitle =
             newsletterTitle + ' - ' + moment(today.toISOString()).format('LL');
         const text = renderToString(
@@ -60,14 +66,17 @@ const NewsletterCreationForm = ({ content }) => {
                 title={formatedtitle}
             ></HtmlTemplateView>,
         );
-        dispatch(createNewsletter(location.pathname, formatedtitle, text)).then(
-            (response) => {
-                toast.success(
-                    <Toast success autoClose={5000} title={response.message} />,
-                );
-            },
+
+        dispatch(
+            createContent(props.location.pathname, {
+                '@type': 'Newsletter',
+                title: formatedtitle,
+                text: text,
+            }),
         );
         setNewsSelection([]);
+
+        history.push(props.location.pathname);
     };
     return (
         <>

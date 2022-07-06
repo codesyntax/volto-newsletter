@@ -1,10 +1,10 @@
-import { GET_NEWSITEMS } from '../../actions';
+import { SEND_NEWSLETTER } from '../../actions';
 // import { map } from 'lodash';
 const getInitialState = {
   error: null,
   loaded: false,
   loading: false,
-  newsitems: [],
+  message: '',
 };
 
 /**
@@ -14,30 +14,30 @@ const getInitialState = {
  * @param {Object} action Action to be handled.
  * @returns {Object} New state.
  */
-export const getNewsitemsReducer = (state = getInitialState, action = {}) => {
+export const sendNewsletterReducer = (state = getInitialState, action = {}) => {
   switch (action.type) {
-    case `${GET_NEWSITEMS}_PENDING`:
+    case `${SEND_NEWSLETTER}_PENDING`:
       return {
         ...state,
         error: null,
         loaded: false,
         loading: true,
       };
-    case `${GET_NEWSITEMS}_FAIL`:
+    case `${SEND_NEWSLETTER}_FAIL`:
       return {
         ...state,
         error: true,
         loaded: false,
         loading: false,
-        newsitems: [],
+        message: action.message,
       };
-    case `${GET_NEWSITEMS}_SUCCESS`:
+    case `${SEND_NEWSLETTER}_SUCCESS`:
       return {
         ...state,
         error: null,
         loaded: true,
         loading: false,
-        newsitems: action.result.items,
+        message: action.message,
       };
     default:
       return state;

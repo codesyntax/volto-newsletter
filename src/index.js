@@ -1,4 +1,5 @@
 import NewsletterContainerView from './components/Views/NewsletterContainerView';
+import NewsletterView from './components/Views/NewsletterView';
 import reducers from './reducers';
 const applyConfig = (config) => {
   config.views = {
@@ -6,6 +7,7 @@ const applyConfig = (config) => {
     contentTypesViews: {
       ...config.views.contentTypesViews,
       NewsletterContainer: NewsletterContainerView,
+      Newsletter: NewsletterView,
     },
   };
   config.addonReducers = {
