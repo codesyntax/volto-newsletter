@@ -38,6 +38,7 @@ const cssStyle = {
         lineHeight: '1.1rem',
         textAlign: 'right',
         paddingRight: '1rem',
+        backgroundColor: '#BD097F',
     },
     headerImage: { fontSize: '0pt', lineHeight: '0pt', textAlign: 'right' },
     tdPadding: { padding: '50px 30px 0 30px' },
@@ -143,7 +144,7 @@ const HtmlTemplateView = ({ newsitems, title, content }) => {
                         border="0"
                         cellSpacing="0"
                         cellPadding="0"
-                        bgcolor="#579D7E"
+                        bgcolor="#F2F2F2"
                     >
                         <tr>
                             <td align="center" valign="top">
@@ -176,12 +177,11 @@ const HtmlTemplateView = ({ newsitems, title, content }) => {
                                                             border="0"
                                                             cellSpacing="0"
                                                             cellPadding="0"
-                                                            style={
-                                                                cssStyle.backgroundColor
-                                                            }
+
                                                         >
                                                             <tr>
                                                                 <td
+                                                                    bgcolor="#BD097F"
                                                                     style={
                                                                         cssStyle.newsletterDate
                                                                     }
@@ -274,7 +274,7 @@ const HtmlTemplateView = ({ newsitems, title, content }) => {
                                                                                                             style={
                                                                                                                 cssStyle.newsMain
                                                                                                             }
-                                                                                                            width="300"
+                                                                                                            width="280"
                                                                                                         >
                                                                                                             <table
                                                                                                                 width="100%"
@@ -300,12 +300,14 @@ const HtmlTemplateView = ({ newsitems, title, content }) => {
                                                                                                                                 }
                                                                                                                                 alt=""
                                                                                                                                 border="0"
+                                                                                                                                width="300"
                                                                                                                             />
                                                                                                                         </td>
                                                                                                                     </tr>
                                                                                                                 </tbody>
                                                                                                             </table>
                                                                                                         </th>
+                                                                                                        
                                                                                                         <th
                                                                                                             className="column-dir"
                                                                                                             dir="ltr"
@@ -457,6 +459,21 @@ const HtmlTemplateView = ({ newsitems, title, content }) => {
                                                                                             </table>
                                                                                         </td>
                                                                                     </tr>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <table
+                                                                                                cellSpacing="0"
+                                                                                                cellPadding="10"
+                                                                                                border="0"
+                                                                                            >
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <td></td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </td>
+                                                                                    </tr>
                                                                                 </>
                                                                             ),
                                                                         )}
@@ -499,6 +516,22 @@ const HtmlTemplateView = ({ newsitems, title, content }) => {
                                                                                         </span>
                                                                                     </a>
                                                                                 </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <table
+                                                                        width="10"
+                                                                        cellSpacing="10"
+                                                                        cellPadding="0"
+                                                                        border="0"
+                                                                    >
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td></td>
                                                                             </tr>
                                                                         </tbody>
                                                                     </table>
