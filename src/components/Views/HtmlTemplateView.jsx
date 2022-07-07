@@ -176,7 +176,6 @@ const HtmlTemplateView = ({ newsitems, title, content }) => {
                                                             border="0"
                                                             cellSpacing="0"
                                                             cellPadding="0"
-
                                                         >
                                                             <tr>
                                                                 <td
@@ -294,7 +293,7 @@ const HtmlTemplateView = ({ newsitems, title, content }) => {
                                                                                                                                     newsitem
                                                                                                                                         .image
                                                                                                                                         .scales
-                                                                                                                                        .mini
+                                                                                                                                        .preview
                                                                                                                                         .download
                                                                                                                                 }
                                                                                                                                 alt=""
@@ -306,7 +305,7 @@ const HtmlTemplateView = ({ newsitems, title, content }) => {
                                                                                                                 </tbody>
                                                                                                             </table>
                                                                                                         </th>
-                                                                                                        
+
                                                                                                         <th
                                                                                                             className="column-dir"
                                                                                                             dir="ltr"

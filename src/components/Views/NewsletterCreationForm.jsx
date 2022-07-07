@@ -79,10 +79,10 @@ const NewsletterCreationForm = ({ props }) => {
     };
     return (
         <>
-            <h2>Udal buletinaren titulua</h2>
             <Input
                 placeholder="Udal buletina"
                 value={newsletterTitle}
+                label="New newsletter title"
                 onChange={handleChangeInputTitle}
             />
             {newsitems?.length > 0 && (

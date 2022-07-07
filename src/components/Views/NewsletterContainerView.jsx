@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { UniversalLink } from '@plone/volto/components';
 import NewsletterCreationForm from './NewsletterCreationForm';
+import './newsletter.less';
 /**
  * ContractView view component class.
  * @function NewsletterContainerView
@@ -22,7 +23,7 @@ const NewsletterContainerView = (props) => {
     moment.locale(lang);
 
     return (
-        <Container className="view-wrapper grid stackable">
+        <Container className="view-wrapper grid stackable newsletter-container">
             <Grid.Row>
                 <Grid.Column width={1}></Grid.Column>
                 <Grid.Column width={10}>
