@@ -40,7 +40,7 @@ const cssStyle = {
         paddingRight: '1rem',
         backgroundColor: '#BD097F',
     },
-    headerImage: { fontSize: '0pt', lineHeight: '0pt', textAlign: 'right' },
+    headerImage: { fontSize: '0pt', lineHeight: '0pt', backgroundColor: '#FFFFFF' },
     tdPadding: { padding: '50px 30px 0 30px' },
     newsTitle: {
         color: '#000000',
@@ -193,6 +193,7 @@ const HtmlTemplateView = ({ newsitems, title, content }) => {
                                                                         style={
                                                                             cssStyle.headerImage
                                                                         }
+                                                                        bgcolor="#ffffff"
                                                                     >
                                                                         <img
                                                                             src={
