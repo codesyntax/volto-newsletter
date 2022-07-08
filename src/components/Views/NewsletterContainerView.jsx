@@ -41,19 +41,21 @@ const NewsletterContainerView = (props) => {
                     {content.items?.length > 0 && (
                         <>
                             <div className="newletter-elements">
-                                <h2>Newsletter elements</h2>
+                                <h2>Last 10 newsletter elements</h2>
                                 <ul>
-                                    {content.items.map((newsletter, index) => (
-                                        <>
-                                            <li>
-                                                <UniversalLink
-                                                    href={newsletter['@id']}
-                                                >
-                                                    {newsletter.title}
-                                                </UniversalLink>
-                                            </li>
-                                        </>
-                                    ))}
+                                    {content.items
+                                        .slice(-10)
+                                        .map((newsletter, index) => (
+                                            <>
+                                                <li>
+                                                    <UniversalLink
+                                                        href={newsletter['@id']}
+                                                    >
+                                                        {newsletter.title}
+                                                    </UniversalLink>
+                                                </li>
+                                            </>
+                                        ))}
                                 </ul>
                             </div>
                         </>
