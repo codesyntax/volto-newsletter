@@ -126,8 +126,7 @@ const NewsletterView = ({ content }) => {
                         <Icon name="at" />
                         <input />
                     </Input>
-                    <br />
-                    <br />
+
                     <Input
                         iconPosition="left"
                         placeholder="group@postaria.com"
@@ -138,15 +137,13 @@ const NewsletterView = ({ content }) => {
                         <Icon name="at" color={'grey'} />
                         <input />
                     </Input>
-                    <br />
-                    <br />
+
                     <Input
                         placeholder="Udal buletina"
                         onChange={handleChangeinputSubject}
                         value={inputSubject}
                     />
-                    <br />
-                    <br />
+
                     <Button
                         disabled={!enabled}
                         onClick={() => sendButtonHandler()}
