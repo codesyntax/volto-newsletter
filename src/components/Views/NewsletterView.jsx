@@ -34,6 +34,18 @@ const NewsletterView = ({ content }) => {
         setinputFrom(event.target.value);
     }
 
+    const handleBlurFrom = () => {
+        if (!validateEmail(inputFrom)) {
+            seterrorFrom(true);
+        }
+    };
+
+    const handleBlurTo = () => {
+        if (!validateEmail(inputTo)) {
+            seterrorTo(true);
+        }
+    };
+
     function handleChangeinputTo(event) {
         seterrorTo(false);
         setinputTo(event.target.value);
@@ -43,12 +55,15 @@ const NewsletterView = ({ content }) => {
         setinputSubject(event.target.value);
     }
     const enabled =
-        inputFrom.length > 0 && inputTo.length > 0 && inputSubject.length > 0;
+        validateEmail(inputFrom) &&
+        validateEmail(inputTo) > 0 &&
+        inputSubject.length > 0;
 
     function validateEmail(text) {
         const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
         return reg.test(text);
     }
+
     useEffect(() => {
         !newsletter_send.loading &&
             newsletter_send.loaded &&
@@ -69,7 +84,8 @@ const NewsletterView = ({ content }) => {
                 />,
             );
     }, [newsletter_send]);
-    const sendButtonHandler = () => {
+    const sendButtonHandler = (event) => {
+        event.preventDefault();
         const validatedFrom = validateEmail(inputTo);
         const validatedTo = validateEmail(inputFrom);
         if (validatedFrom && validatedTo) {
@@ -115,37 +131,40 @@ const NewsletterView = ({ content }) => {
             menuItem: 'Bidali',
             render: () => (
                 <Tab.Pane className="Tabs">
-                    <Input
-                        icon="arrow right"
-                        iconPosition="left"
-                        label={{ tag: true, content: 'From' }}
-                        labelPosition="right"
-                        placeholder="info@newsletter.com"
-                        onChange={handleChangeInputFrom}
-                        value={inputFrom}
-                        error={errorFrom}
-                    />
-                    <Input
-                        icon="arrow right"
-                        iconPosition="left"
-                        label={{ tag: true, content: 'To' }}
-                        labelPosition="right"
-                        placeholder="group@postaria.com"
-                        onChange={handleChangeinputTo}
-                        value={inputTo}
-                        error={errorTo}
-                    />
-                    <Input
-                        placeholder="Udal buletina"
-                        onChange={handleChangeinputSubject}
-                        value={inputSubject}
-                    />
-                    <Button
-                        disabled={!enabled}
-                        onClick={() => sendButtonHandler()}
-                    >
-                        Send
-                    </Button>
+                    <form onSubmit={sendButtonHandler}>
+                        <Input
+                            icon="arrow right"
+                            iconPosition="left"
+                            label={{ tag: true, content: 'From' }}
+                            labelPosition="right"
+                            placeholder="info@newsletter.com"
+                            onChange={handleChangeInputFrom}
+                            onBlur={handleBlurFrom}
+                            value={inputFrom}
+                            error={errorFrom}
+                            type="email"
+                        />
+                        <Input
+                            icon="arrow right"
+                            iconPosition="left"
+                            label={{ tag: true, content: 'To' }}
+                            labelPosition="right"
+                            placeholder="group@postaria.com"
+                            onChange={handleChangeinputTo}
+                            value={inputTo}
+                            error={errorTo}
+                            onBlur={handleBlurTo}
+                            type="email"
+                        />
+                        <Input
+                            placeholder="Udal buletina"
+                            onChange={handleChangeinputSubject}
+                            value={inputSubject}
+                        />
+                        <Button disabled={!enabled} type="submit">
+                            Send
+                        </Button>
+                    </form>
                 </Tab.Pane>
             ),
         },
