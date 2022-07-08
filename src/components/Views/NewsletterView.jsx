@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import { Grid, Container } from 'semantic-ui-react';
 import { Tab } from 'semantic-ui-react';
 import { flattenHTMLToAppURL } from '@plone/volto/helpers';
-import { Input, Icon } from 'semantic-ui-react';
+import { Input } from 'semantic-ui-react';
 import { Button } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { sendNewsletter } from '../../actions';
@@ -98,7 +98,7 @@ const NewsletterView = ({ content }) => {
     };
     const panes = [
         {
-            menuItem: 'Preview',
+            menuItem: 'Aurrebista',
             render: () => (
                 <Tab.Pane className="Tabs">
                     {content.text && (
@@ -112,38 +112,34 @@ const NewsletterView = ({ content }) => {
             ),
         },
         {
-            menuItem: 'Send Newsletter',
+            menuItem: 'Bidali',
             render: () => (
                 <Tab.Pane className="Tabs">
-                    <h2>Send the newsletter</h2>
                     <Input
+                        icon="arrow right"
                         iconPosition="left"
+                        label={{ tag: true, content: 'From' }}
+                        labelPosition="right"
                         placeholder="info@newsletter.com"
                         onChange={handleChangeInputFrom}
                         value={inputFrom}
                         error={errorFrom}
-                    >
-                        <Icon name="at" />
-                        <input />
-                    </Input>
-
+                    />
                     <Input
+                        icon="arrow right"
                         iconPosition="left"
+                        label={{ tag: true, content: 'To' }}
+                        labelPosition="right"
                         placeholder="group@postaria.com"
                         onChange={handleChangeinputTo}
                         value={inputTo}
                         error={errorTo}
-                    >
-                        <Icon name="at" color={'grey'} />
-                        <input />
-                    </Input>
-
+                    />
                     <Input
                         placeholder="Udal buletina"
                         onChange={handleChangeinputSubject}
                         value={inputSubject}
                     />
-
                     <Button
                         disabled={!enabled}
                         onClick={() => sendButtonHandler()}
