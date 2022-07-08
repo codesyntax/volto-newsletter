@@ -36,11 +36,19 @@ const NewsletterView = ({ content }) => {
     const [inputSubject, setinputSubject] = useState('');
 
     function handleChangeInputFrom(event) {
-        setinputFrom({
-            value: event.target.value,
-            error: false,
-            icon: 'arrow right',
-        });
+        if (!validateEmail(event.target.value)) {
+            setinputFrom({
+                value: event.target.value,
+                error: false,
+                icon: 'arrow right',
+            });
+        } else {
+            setinputFrom({
+                value: event.target.value,
+                error: false,
+                icon: 'check green',
+            });
+        }
     }
 
     const handleBlurFrom = () => {
@@ -76,11 +84,19 @@ const NewsletterView = ({ content }) => {
     };
 
     function handleChangeinputTo(event) {
-        setinputTo({
-            value: event.target.value,
-            error: false,
-            icon: 'arrow right',
-        });
+        if (!validateEmail(event.target.value)) {
+            setinputTo({
+                value: event.target.value,
+                error: false,
+                icon: 'arrow right',
+            });
+        } else {
+            setinputTo({
+                value: event.target.value,
+                error: false,
+                icon: 'check green',
+            });
+        }
     }
 
     function handleChangeinputSubject(event) {

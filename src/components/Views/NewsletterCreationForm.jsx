@@ -75,7 +75,6 @@ const NewsletterCreationForm = ({ props }) => {
             }),
         );
         setNewsSelection([]);
-        //history.push(props.location.pathname);
     };
     return (
         <>
