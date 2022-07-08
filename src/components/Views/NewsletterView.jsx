@@ -23,40 +23,72 @@ import { toast } from 'react-toastify';
 const NewsletterView = ({ content }) => {
     const dispatch = useDispatch();
     const newsletter_send = useSelector((store) => store.newsletter_send);
-    const [inputFrom, setinputFrom] = useState('');
-    const [inputTo, setinputTo] = useState('');
+    const [inputFrom, setinputFrom] = useState({
+        value: '',
+        error: false,
+        icon: 'arrow right',
+    });
+    const [inputTo, setinputTo] = useState({
+        value: '',
+        error: false,
+        icon: 'arrow right',
+    });
     const [inputSubject, setinputSubject] = useState('');
-    const [errorFrom, seterrorFrom] = useState(false);
-    const [errorTo, seterrorTo] = useState(false);
 
     function handleChangeInputFrom(event) {
-        seterrorFrom(false);
-        setinputFrom(event.target.value);
+        setinputFrom({
+            value: event.target.value,
+            error: false,
+            icon: 'arrow right',
+        });
     }
 
     const handleBlurFrom = () => {
-        if (!validateEmail(inputFrom)) {
-            seterrorFrom(true);
+        if (!validateEmail(inputFrom.value)) {
+            setinputFrom({
+                value: inputFrom.value,
+                error: true,
+                icon: 'cancel red',
+            });
+        } else {
+            setinputFrom({
+                value: inputFrom.value,
+                error: false,
+                icon: 'check green',
+            });
         }
     };
 
     const handleBlurTo = () => {
-        if (!validateEmail(inputTo)) {
-            seterrorTo(true);
+        if (!validateEmail(inputTo.value)) {
+            setinputTo({
+                value: inputTo.value,
+                error: true,
+                icon: 'cancel red',
+            });
+        } else {
+            setinputTo({
+                value: inputTo.value,
+                error: false,
+                icon: 'check green',
+            });
         }
     };
 
     function handleChangeinputTo(event) {
-        seterrorTo(false);
-        setinputTo(event.target.value);
+        setinputTo({
+            value: event.target.value,
+            error: false,
+            icon: 'arrow right',
+        });
     }
 
     function handleChangeinputSubject(event) {
         setinputSubject(event.target.value);
     }
     const enabled =
-        validateEmail(inputFrom) &&
-        validateEmail(inputTo) > 0 &&
+        validateEmail(inputFrom.value) &&
+        validateEmail(inputTo.value) > 0 &&
         inputSubject.length > 0;
 
     function validateEmail(text) {
@@ -86,29 +118,45 @@ const NewsletterView = ({ content }) => {
     }, [newsletter_send]);
     const sendButtonHandler = (event) => {
         event.preventDefault();
-        const validatedFrom = validateEmail(inputTo);
-        const validatedTo = validateEmail(inputFrom);
+        const validatedFrom = validateEmail(inputTo.value);
+        const validatedTo = validateEmail(inputFrom.value);
         if (validatedFrom && validatedTo) {
             dispatch(
                 sendNewsletter(
                     location.pathname,
-                    inputFrom,
-                    inputTo,
+                    inputFrom.value,
+                    inputTo.value,
                     inputSubject,
                 ),
             );
-            setinputFrom('');
-            setinputTo('');
+            setinputFrom({
+                value: '',
+                error: false,
+                icon: 'arrow right',
+            });
+            setinputTo({
+                value: '',
+                error: false,
+                icon: 'arrow right',
+            });
             setinputSubject('');
         } else {
             toast.error(
                 <Toast error autoClose={3000} title={'No Validated emails'} />,
             );
             if (!validatedFrom) {
-                seterrorFrom(true);
+                setinputFrom({
+                    value: inputFrom.value,
+                    error: true,
+                    icon: 'error',
+                });
             }
             if (!validatedTo) {
-                seterrorTo(true);
+                setinputTo({
+                    value: inputTo.value,
+                    error: true,
+                    icon: 'error',
+                });
             }
         }
     };
@@ -133,26 +181,26 @@ const NewsletterView = ({ content }) => {
                 <Tab.Pane className="Tabs">
                     <form onSubmit={sendButtonHandler}>
                         <Input
-                            icon="arrow right"
+                            icon={inputFrom.icon}
                             iconPosition="left"
                             label={{ tag: true, content: 'From' }}
                             labelPosition="right"
                             placeholder="info@newsletter.com"
                             onChange={handleChangeInputFrom}
                             onBlur={handleBlurFrom}
-                            value={inputFrom}
-                            error={errorFrom}
+                            value={inputFrom.value}
+                            error={inputFrom.error}
                             type="email"
                         />
                         <Input
-                            icon="arrow right"
+                            icon={inputTo.icon}
                             iconPosition="left"
                             label={{ tag: true, content: 'To' }}
                             labelPosition="right"
                             placeholder="group@postaria.com"
                             onChange={handleChangeinputTo}
-                            value={inputTo}
-                            error={errorTo}
+                            value={inputTo.value}
+                            error={inputTo.error}
                             onBlur={handleBlurTo}
                             type="email"
                         />
