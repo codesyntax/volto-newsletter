@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import { Grid, Container } from 'semantic-ui-react';
 import { Tab } from 'semantic-ui-react';
 import { flattenHTMLToAppURL } from '@plone/volto/helpers';
-import { Input } from 'semantic-ui-react';
+import { Input, Icon } from 'semantic-ui-react';
 import { Button } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { sendNewsletter } from '../../actions';
@@ -24,16 +24,21 @@ const NewsletterView = ({ content }) => {
     const dispatch = useDispatch();
     const newsletter_send = useSelector((store) => store.newsletter_send);
     const [inputFrom, setinputFrom] = useState('');
+    const [inputTo, setinputTo] = useState('');
+    const [inputSubject, setinputSubject] = useState('');
+    const [errorFrom, seterrorFrom] = useState(false);
+    const [errorTo, seterrorTo] = useState(false);
+
     function handleChangeInputFrom(event) {
+        seterrorFrom(false);
         setinputFrom(event.target.value);
     }
 
-    const [inputTo, setinputTo] = useState('');
     function handleChangeinputTo(event) {
+        seterrorTo(false);
         setinputTo(event.target.value);
     }
 
-    const [inputSubject, setinputSubject] = useState('');
     function handleChangeinputSubject(event) {
         setinputSubject(event.target.value);
     }
@@ -65,8 +70,9 @@ const NewsletterView = ({ content }) => {
             );
     }, [newsletter_send]);
     const sendButtonHandler = () => {
-        const validated = validateEmail(inputFrom) && validateEmail(inputTo);
-        if (validated) {
+        const validatedFrom = validateEmail(inputTo);
+        const validatedTo = validateEmail(inputFrom);
+        if (validatedFrom && validatedTo) {
             dispatch(
                 sendNewsletter(
                     location.pathname,
@@ -82,11 +88,17 @@ const NewsletterView = ({ content }) => {
             toast.error(
                 <Toast error autoClose={3000} title={'No Validated emails'} />,
             );
+            if (!validatedFrom) {
+                seterrorFrom(true);
+            }
+            if (!validatedTo) {
+                seterrorTo(true);
+            }
         }
     };
     const panes = [
         {
-            menuItem: 'Aurrebista',
+            menuItem: 'Preview',
             render: () => (
                 <Tab.Pane className="Tabs">
                     {content.text && (
@@ -100,32 +112,41 @@ const NewsletterView = ({ content }) => {
             ),
         },
         {
-            menuItem: 'Bidali',
+            menuItem: 'Send Newsletter',
             render: () => (
                 <Tab.Pane className="Tabs">
+                    <h2>Send the newsletter</h2>
                     <Input
-                        icon="arrow right"
                         iconPosition="left"
-                        label={{ tag: true, content: 'From' }}
-                        labelPosition="right"
                         placeholder="info@newsletter.com"
                         onChange={handleChangeInputFrom}
                         value={inputFrom}
-                    />
+                        error={errorFrom}
+                    >
+                        <Icon name="at" />
+                        <input />
+                    </Input>
+                    <br />
+                    <br />
                     <Input
-                        icon="arrow right"
                         iconPosition="left"
-                        label={{ tag: true, content: 'To' }}
-                        labelPosition="right"
                         placeholder="group@postaria.com"
                         onChange={handleChangeinputTo}
                         value={inputTo}
-                    />
+                        error={errorTo}
+                    >
+                        <Icon name="at" color={'grey'} />
+                        <input />
+                    </Input>
+                    <br />
+                    <br />
                     <Input
                         placeholder="Udal buletina"
                         onChange={handleChangeinputSubject}
                         value={inputSubject}
                     />
+                    <br />
+                    <br />
                     <Button
                         disabled={!enabled}
                         onClick={() => sendButtonHandler()}
