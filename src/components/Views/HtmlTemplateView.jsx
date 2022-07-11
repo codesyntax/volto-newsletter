@@ -40,7 +40,11 @@ const cssStyle = {
         paddingRight: '1rem',
         backgroundColor: '#BD097F',
     },
-    headerImage: { fontSize: '0pt', lineHeight: '0pt', backgroundColor: '#FFFFFF' },
+    headerImage: {
+        fontSize: '0pt',
+        lineHeight: '0pt',
+        backgroundColor: '#FFFFFF',
+    },
     tdPadding: { padding: '50px 30px 0 30px' },
     newsTitle: {
         color: '#000000',
@@ -235,7 +239,9 @@ const HtmlTemplateView = ({ newsitems, title, content }) => {
                                                                                     cssStyle.newsTitle
                                                                                 }
                                                                             >
-                                                                                Albisteak
+                                                                                {
+                                                                                    content.newsletter_news_title
+                                                                                }
                                                                             </td>
                                                                         </tr>
                                                                         {newsitems?.map(
@@ -499,7 +505,9 @@ const HtmlTemplateView = ({ newsitems, title, content }) => {
                                                                                     }
                                                                                 >
                                                                                     <a
-                                                                                        href="https://zumaia.eus/eu/albisteak"
+                                                                                        href={
+                                                                                            content.newsletter_news_url
+                                                                                        }
                                                                                         style={
                                                                                             cssStyle.textdecorationnone
                                                                                         }
@@ -510,8 +518,9 @@ const HtmlTemplateView = ({ newsitems, title, content }) => {
                                                                                                 cssStyle.moreNewsLink
                                                                                             }
                                                                                         >
-                                                                                            Albiste
-                                                                                            gehiago
+                                                                                            {
+                                                                                                content.newsletter_news_morelinktext
+                                                                                            }
                                                                                         </span>
                                                                                     </a>
                                                                                 </td>
