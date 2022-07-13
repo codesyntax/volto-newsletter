@@ -22,6 +22,7 @@ export const sendNewsletterReducer = (state = getInitialState, action = {}) => {
         error: null,
         loaded: false,
         loading: true,
+        message: '',
       };
     case `${SEND_NEWSLETTER}_FAIL`:
       return {

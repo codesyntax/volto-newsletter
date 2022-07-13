@@ -3,7 +3,7 @@
  * @module Components/Views/NewsletterView
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Container } from 'semantic-ui-react';
 import { Tab } from 'semantic-ui-react';
@@ -23,6 +23,7 @@ import { toast } from 'react-toastify';
 const NewsletterView = ({ content }) => {
     const dispatch = useDispatch();
     const newsletter_send = useSelector((store) => store.newsletter_send);
+    let newsletter_send_ref = useRef(newsletter_send);
     const [inputFrom, setinputFrom] = useState({
         value: '',
         error: false,
@@ -113,7 +114,7 @@ const NewsletterView = ({ content }) => {
     }
 
     useEffect(() => {
-        !newsletter_send.loading &&
+        newsletter_send_ref.current.loading &&
             newsletter_send.loaded &&
             toast.success(
                 <Toast
@@ -123,7 +124,8 @@ const NewsletterView = ({ content }) => {
                 />,
             );
 
-        newsletter_send.error &&
+        newsletter_send_ref.current.loading &&
+            newsletter_send.error &&
             toast.error(
                 <Toast
                     error
@@ -131,6 +133,8 @@ const NewsletterView = ({ content }) => {
                     title={newsletter_send.message}
                 />,
             );
+
+        newsletter_send_ref.current = newsletter_send;
     }, [newsletter_send]);
     const sendButtonHandler = (event) => {
         event.preventDefault();
