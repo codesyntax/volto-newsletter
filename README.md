@@ -40,11 +40,11 @@ Demo GIF
 
    ```JSON
    "addons": [
-       "@eeacms/volto-newsletter"
+       "@codesyntax/volto-newsletter"
    ],
 
    "dependencies": {
-       "@eeacms/volto-newsletter": "^1.0.0"
+       "@codesyntax/volto-newsletter": "^1.0.0"
    }
    ```
 
