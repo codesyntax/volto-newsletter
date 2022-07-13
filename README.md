@@ -1,20 +1,5 @@
 # volto-newsletter
 
-[![Releases](https://img.shields.io/github/v/release/eea/volto-newsletter)](https://github.com/eea/volto-newsletter/releases)
-
-[![Pipeline](https://ci.eionet.europa.eu/buildStatus/icon?job=volto-addons%2Fvolto-newsletter%2Fmaster&subject=master)](https://ci.eionet.europa.eu/view/Github/job/volto-addons/job/volto-newsletter/job/master/display/redirect)
-[![Lines of Code](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-newsletter-master&metric=ncloc)](https://sonarqube.eea.europa.eu/dashboard?id=volto-newsletter-master)
-[![Coverage](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-newsletter-master&metric=coverage)](https://sonarqube.eea.europa.eu/dashboard?id=volto-newsletter-master)
-[![Bugs](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-newsletter-master&metric=bugs)](https://sonarqube.eea.europa.eu/dashboard?id=volto-newsletter-master)
-[![Duplicated Lines (%)](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-newsletter-master&metric=duplicated_lines_density)](https://sonarqube.eea.europa.eu/dashboard?id=volto-newsletter-master)
-
-[![Pipeline](https://ci.eionet.europa.eu/buildStatus/icon?job=volto-addons%2Fvolto-newsletter%2Fdevelop&subject=develop)](https://ci.eionet.europa.eu/view/Github/job/volto-addons/job/volto-newsletter/job/develop/display/redirect)
-[![Lines of Code](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-newsletter-develop&metric=ncloc)](https://sonarqube.eea.europa.eu/dashboard?id=volto-newsletter-develop)
-[![Coverage](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-newsletter-develop&metric=coverage)](https://sonarqube.eea.europa.eu/dashboard?id=volto-newsletter-develop)
-[![Bugs](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-newsletter-develop&metric=bugs)](https://sonarqube.eea.europa.eu/dashboard?id=volto-newsletter-develop)
-[![Duplicated Lines (%)](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-newsletter-develop&metric=duplicated_lines_density)](https://sonarqube.eea.europa.eu/dashboard?id=volto-newsletter-develop)
-
-
 [Volto](https://github.com/plone/volto) add-on
 
 ## Features
@@ -90,19 +75,4 @@ See [RELEASE.md](https://github.com/eea/volto-newsletter/blob/master/RELEASE.md)
 
 See [DEVELOP.md](https://github.com/eea/volto-newsletter/blob/master/DEVELOP.md).
 
-## Copyright and license
-
-The Initial Owner of the Original Code is European Environment Agency (EEA).
-All Rights Reserved.
-
-See [LICENSE.md](https://github.com/eea/volto-newsletter/blob/master/LICENSE.md) for details.
-
-## Funding
-
-[European Environment Agency (EU)](http://eea.europa.eu)
-volto-addon-template/blob/master/LICENSE.md) for details.
-
-## Funding
-
-[European Environment Agency (EU)](http://eea.europa.eu)
 
