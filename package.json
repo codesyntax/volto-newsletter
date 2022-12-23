@@ -1,6 +1,6 @@
 {
   "name": "@codesyntax/volto-newsletter",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "@codesyntax/volto-newsletter: Volto add-on",
   "main": "src/index.js",
   "author": "Lur Ibargutxi <libargutxi@codesyntax.com>",
@@ -17,7 +17,8 @@
     "url": "git@github.com:codesyntax/volto-newsletter.git"
   },
   "dependencies": {
-    "@plone/scripts": "*"
+    "@plone/scripts": "*",
+    "release-it": "^15.1.1"
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.9.5",
